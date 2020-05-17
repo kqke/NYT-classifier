@@ -1,12 +1,32 @@
-import xlrd, validators
+import xlrd
+import validators
+from newspaper import Article
+from os import path
 from object_extract.config import *
 
-def extract_articles(excel_file):
+
+def extract(data_root):
+    """
+
+    :param data_root:
+    :return:
+    """
+    articles = list()
+    for tag in FILES:
+        file = data_root + tag
+        if path.exists(file):
+            articles.append(extract_articles(data_root + tag, tag))
+    return articles
+
+
+def extract_articles(excel_file, tag, nlp=False):
     """
     Extract links from excel file that is in correct format.
     Correct format: links appear in the second column.
     :param excel_file:
-    :return: list of links that appear in the second column of the excel file
+    :param tag:
+    :param nlp:
+    :return:
     """
     spread_sheet = xlrd.open_workbook(excel_file)
     results = list()
@@ -18,6 +38,8 @@ def extract_articles(excel_file):
                 article = Article(link)
                 article.download()
                 article.parse()
-
+                if nlp:
+                    article.nlp()
+                article.tag = tag
                 results.append(article)
     return results

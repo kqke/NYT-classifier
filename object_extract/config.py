@@ -1,4 +1,8 @@
-DATA_ROOT = "data/"
+from os import getcwd
+from pathlib import Path
+
+
+DATA_ROOT = str(Path(getcwd()).parent) + '/data/'
 
 PURGES = 'PURGES'
 ASSASSINATIONS = 'ASSASSINATIONS'
@@ -10,13 +14,18 @@ REVOLUTIONS = 'REVOLUTIONS'
 AG_DEMO = 'AG DEMO'
 NONE = 'NONE'
 
+
 TAGS = {PURGES: 1, ASSASSINATIONS: 2, GOVERNMENT_CRISES: 3,
         GUERRILLA_WARFARE: 4, GENERAL_STRIKES: 5, RIOTS: 6,
         REVOLUTIONS: 7, AG_DEMO: 8, NONE: 9}
+
+TAGS_L = TAGS.keys()
+
+FILES = [tag + '.xlsx' for tag in TAGS_L]
 
 R_TAGS = {1: PURGES, 2: ASSASSINATIONS, 3: GOVERNMENT_CRISES,
           4: GUERRILLA_WARFARE, 5: GENERAL_STRIKES, 6: RIOTS,
           7: REVOLUTIONS, 8: AG_DEMO, 9: NONE}
 
-ARTICLE = 2
+ARTICLE = 3
 
