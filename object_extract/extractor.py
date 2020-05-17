@@ -32,14 +32,21 @@ def extract_articles(excel_file, tag, nlp=False):
     results = list()
     for sheet in spread_sheet.sheets():
         col = sheet.col(ARTICLE)
+        counter = 0
         for cell in col:
+            if counter == 10:
+                break
             link = cell.value
             if validators.url(link):
                 article = Article(link)
-                article.download()
-                article.parse()
+                try:
+                    article.download()
+                    article.parse()
+                except:
+                    continue
                 if nlp:
                     article.nlp()
                 article.tag = tag
                 results.append(article)
+                counter += 1
     return results

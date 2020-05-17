@@ -19,7 +19,9 @@ TAGS = {PURGES: 1, ASSASSINATIONS: 2, GOVERNMENT_CRISES: 3,
         GUERRILLA_WARFARE: 4, GENERAL_STRIKES: 5, RIOTS: 6,
         REVOLUTIONS: 7, AG_DEMO: 8, NONE: 9}
 
+
 TAGS_L = TAGS.keys()
+
 
 FILES = [tag + '.xlsx' for tag in TAGS_L]
 
